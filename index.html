@@ -26,7 +26,7 @@
         <div class="w-100 d-none d-md-block"></div>
     
         <div class="col-6 col-sm-4 mt-4" style="color: white;">Timer: <h3 id='countdown'></h3></div>
-        <div class="col-6 col-sm-4 mt-4"> <button onClick="clearHigh(event)">clear high scores</button></div>
+        <div class="col-6 col-sm-4 mt-4"> <button onClick="clearHigh(event)">Clear High Scores</button></div>
       </div>
     </div>
     <div id='quiz' class="col-10 col-sm-6 card mb-3">
@@ -166,7 +166,6 @@
     function setHighScore(correctCount) {
       document.querySelector('#scorePage').innerHTML = `Your score is ${correctCount}!<div>Name: <input type="text" name="user" id="userID" placeholder="Enter Your Name"><button id="savebtn" class="save-btn btn" onclick="submitScores(event)">Save</button>`;
       console.log(userID)
-
     }
 
     // when submitted  stores data in an object
