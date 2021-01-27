@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Favorite Movies</title>
+  <title>Space Quiz</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" />
@@ -12,13 +12,14 @@
 <body style="background-image: url(https://i.pinimg.com/originals/cc/4e/01/cc4e012fc8d96cbe52d99dd863743823.jpg)">
 
   <div class="container mt-3">
-    <h1 style="color: white;">Quiz Master</h1>
+    <h1 style="color: white;">Welcome space cadet</h1>
 
     <div class="container">
       <div class="row">
         <div class="col-6 col-sm-4 mt-4">
-           <button onClick="startQuiz()" class="float-center" style="color:green">start quiz</button>
-           <button onClick="finishQuiz(event)" class="float-center" style="color:red">End Quiz</button></div>
+           <button onClick="startQuiz()" class="float-center" style="color:green">Start Quiz</button>
+           <button onClick="finishQuiz(event)" class="float-center" style="color:red">End Quiz</button>
+           <button onClick="location = location['href']" class="float-center" style="color:blue">Restart</button></div>
         <div class="col-6 col-sm-4 mt-4"><p class="card-text" style='color: white' id='highScoreBox'></p> </div>
     
         <!-- Force next columns to break to new line at md breakpoint and up -->
@@ -187,18 +188,11 @@
       if (localStorage.highScore == undefined) {
         document.getElementById('highScoreBox').innerText = `The high score is not set yet`
       } else {
-        document.getElementById('highScoreBox').innerText = `The high score is ${localStorage.highScore}, achieved by ${localStorage.highUser}`
+        document.getElementById('highScoreBox').innerText = `The high score is ${localStorage.highScore} \r\n Achieved by ${localStorage.highUser}`
       }
     }
 
     // START: 
-
-    // async function restartQuiz(event){
-    //   questionNum = 0
-    //   countdownValue = 60
-    //   countdownTimer = setInterval(timerDecreaseAndDisplay, 1000)
-    //   startQuiz()
-    // }
 
     function startQuiz() {
       correctCount = 0
