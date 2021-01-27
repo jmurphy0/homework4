@@ -33,9 +33,6 @@
       <form id="questionBox" class="card-body">
         <!-- put the questions in here-->
       </form>
-      <!-- <div id='answerResponse' class="card-footer alert-secondary">
-        Please select an answer
-      </div> -->
     </div>
     <div id='scorePage' class="col-10 col-sm-6 card d-none">
       <div class="mb-3">
@@ -87,15 +84,11 @@
       var question = questions[questionNum]
       var questionEl = document.querySelector('#questionBox')
       // display question
-      questionEl.innerHTML = `
-    <div class="alert alert-warning alert-dark"><h3>${question.question}</h3>
-    `
+      questionEl.innerHTML = `<div class="alert alert-warning alert-dark"><h3>${question.question}</h3>`
       // loop through and show each answer as a button
       for (var i = 0; i < question.answers.length; i++) {
         var answer = question.answers[i]
-        questionEl.innerHTML += `
-    <button onClick="selectAnswer(event,'${answer}')" class="btn btn-secondary btn-block">${answer}</button>
-    `
+        questionEl.innerHTML += `<button onClick="selectAnswer(event,'${answer}')" class="btn btn-secondary btn-block">${answer}</button>`
       }
     }
 
@@ -109,7 +102,6 @@
     function selectAnswer(event, answer) {
       event.preventDefault()
       if (answer === questions[questionNum].correct) {
-        console.log(`good job!`)
         correctCount++
       } else {
         timerDecreaseAndDisplay(10)
