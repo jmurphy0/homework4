@@ -7,11 +7,12 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" />
+  <script src="script.js" type="text/javascript"></script>
 </head>
 
-<body style="background-image: url(https://i.pinimg.com/originals/cc/4e/01/cc4e012fc8d96cbe52d99dd863743823.jpg)">
+<body style="background-image: url(https://i.pinimg.com/originals/cc/4e/01/cc4e012fc8d96cbe52d99dd863743823.jpg); opacity: 80%;">
 
-  <div class="container mt-3">
+  <div class="container mt-4 col-md">
     <h1 style="color: white;">Welcome space cadet</h1>
 
     <div class="container">
@@ -34,170 +35,14 @@
         <!-- put the questions in here-->
       </form>
     </div>
-    <div id='scorePage' class="col-10 col-sm-6 card d-none">
+    <div id='endPage' class="col-10 col-sm-6 card d-none">
       <div class="mb-3">
 
       </div>
     </div>
     </div>
 
-  <script type="text/javascript">
-    // global variables
-    var countdownTimer
-    var countdownValue
-    var questionNum
-    var correctCount = 0
-    var highScore
-    var highUser
-    var user = ''
 
-    var questions = [
-      {
-        question: "Neil deGrasse Tyson is:",
-        answers: ["A Country Singer", "A Politician", "The Man"],
-        correct: "The Man"
-      },
-      {
-        question: "The largest asteroid known is:",
-        answers: ["Justin Bieber", "Vesta", "Ceres"],
-        correct: "Ceres"
-      },
-      {
-        question: "Are aliens real?",
-        answers: ["Yes", "No"],
-        correct: "Yes"
-      },
-      {
-        question: "What does space sound like?",
-        answers: ["White Noise", "Death Metal", "Silence"],
-        correct: "Silence"
-      },
-      {
-        question: "How many star are there in the known universe?",
-        answers: ["Unknown","100,000,000" , "100,000,000^100"],
-        correct: "Unknown"
-      }
-    ]
-
-
-    function showNextQuestion() {
-      var question = questions[questionNum]
-      var questionEl = document.querySelector('#questionBox')
-      // display question
-      questionEl.innerHTML = `<div class="alert alert-warning alert-dark"><h3>${question.question}</h3>`
-      // loop through and show each answer as a button
-      for (var i = 0; i < question.answers.length; i++) {
-        var answer = question.answers[i]
-        questionEl.innerHTML += `<button onClick="selectAnswer(event,'${answer}')" class="btn btn-secondary btn-block">${answer}</button>`
-      }
-    }
-
-    function clearHigh(event) {
-      event.preventDefault()
-      localStorage.clear()
-      showHigh()
-
-    }
-
-    function selectAnswer(event, answer) {
-      event.preventDefault()
-      if (answer === questions[questionNum].correct) {
-        correctCount++
-      } else {
-        timerDecreaseAndDisplay(10)
-      }
-      questionNum++
-      // decide to show next question (if more), else end quiz
-      if (questionNum < questions.length)
-        showNextQuestion()
-      else
-        finishQuiz()
-    }
-
-    function timerDecreaseAndDisplay(byValue = 1) {
-      // decrease by the value passed in, or if nothing, by 1
-      countdownValue -= byValue
-      document.querySelector('#countdown').textContent = countdownValue
-      if (countdownValue < 1)
-        finishQuiz()
-    }
-
-    function showPage(page) {
-      // hide all pages
-      document.querySelector('#quiz').classList.add('d-none')
-      document.querySelector('#scorePage').classList.add('d-none')
-      // show selected page
-      document.querySelector(`#${page}`).classList.remove('d-none')
-    }
-
-    function finishQuiz(event) {
-      if (event) event.preventDefault()
-      console.log(`finished`)
-      // stop the countdown
-      clearInterval(countdownTimer)
-      // show score page
-      setHighScore(correctCount)
-      //getHighScore(correctCount)
-      showPage('scorePage')
-    }
-
-    // display the name capture + leaderboard
-    function getHighScore(score) {
-      //check if there is already a score 
-      console.log(score)
-      if (localStorage.highScore == null ||
-        score.count >= localStorage.highScore) {
-        localStorage.highScore = score.count
-        localStorage.highUser = score.username
-        document.querySelector('#userID').value = ''
-      }
-      else document.querySelector('#userID').value = '';
-    }
-
-    // gives user option to enter name and save score
-    function setHighScore(correctCount) {
-      document.querySelector('#scorePage').innerHTML = `Your score is ${correctCount}!<div>Name: <input type="text" name="user" id="userID" placeholder="Enter Your Name"><button id="savebtn" class="save-btn btn" onclick="submitScores(event)">Save</button>`;
-      console.log(userID)
-    }
-
-    // when submitted  stores data in an object
-    function submitScores(event) {
-      if (event) event.preventDefault()
-      savebtn = document.getElementById('#savebtn')
-      user = document.querySelector('#userID').value
-      var score = {
-        username: user,
-        count: correctCount
-      }
-      //console.log(score)
-      getHighScore(score)
-      showHigh()
-    }
-
-    //showing previous high score
-    function showHigh() {
-      if (localStorage.highScore == undefined) {
-        document.getElementById('highScoreBox').innerText = `The high score is not set yet`
-      } else {
-        document.getElementById('highScoreBox').innerText = `The high score is ${localStorage.highScore} \r\n Achieved by ${localStorage.highUser}`
-      }
-    }
-
-    // START: 
-
-    function startQuiz() {
-      correctCount = 0
-      questionNum = 0
-      countdownValue = 60
-      countdownTimer = setInterval(timerDecreaseAndDisplay, 1000)
-      // switch back to the quizPage
-      showPage('quiz')
-      showNextQuestion()
-      showHigh()
-    }
-
-
-  </script>
 
 </body>
 
